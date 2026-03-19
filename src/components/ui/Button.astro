@@ -1,0 +1,50 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  glow?: boolean;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  glow = false,
+  target,
+  rel,
+} = Astro.props;
+
+const sizes = {
+  sm:  'px-4 py-2 text-sm',
+  md:  'px-6 py-3 text-base',
+  lg:  'px-8 py-4 text-lg',
+};
+
+const styles = {
+  primary: 'text-white font-bold rounded-full transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0',
+  outline: 'border-2 border-[#1A1210] text-[#1A1210] font-bold rounded-full transition-all duration-200 hover:bg-[#1A1210] hover:text-white hover:-translate-y-0.5',
+  ghost:   'text-[#FE953A] font-semibold underline-offset-4 hover:underline transition-colors',
+};
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  target={target}
+  rel={rel}
+  class:list={[
+    sizes[size],
+    styles[variant],
+    glow && 'animate-glow-pulse',
+    className,
+  ]}
+  style={variant === 'primary' ? 'background: linear-gradient(135deg, #E63946 0%, #FE953A 100%);' : ''}
+>
+  <slot />
+</Tag>

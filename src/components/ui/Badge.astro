@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: 'orange' | 'red' | 'dark' | 'light';
+  class?: string;
+}
+
+const { variant = 'orange', class: className = '' } = Astro.props;
+
+const styles = {
+  orange: 'bg-[#FFF0D6] text-[#C25B00] border border-[#FFD49F]',
+  red:    'bg-[#FFE0E2] text-[#B91C1C] border border-[#FFBBBD]',
+  dark:   'bg-[#1A1210] text-white',
+  light:  'bg-white/70 text-[#5C4A3A] border border-white/60',
+};
+---
+
+<span class:list={[
+  'inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide',
+  styles[variant],
+  className,
+]}>
+  <slot />
+</span>

@@ -1,0 +1,246 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+
+// Screenshots for scrolling ticker
+const screenshots = [
+  { src: '/assets/game/hidden-express-banner.jpg',        game: 'Hidden Express' },
+  { src: '/assets/game/finding-roxy-bg-1.png',            game: 'Finding Roxy' },
+  { src: '/assets/game/hh-cassie.png',                    game: 'Hidden Horror' },
+  { src: '/assets/game/sparkling-amber-screens/1.jpg',    game: 'Sparkling Amber' },
+  { src: '/assets/game/detective-tempin-banner.jpg',      game: 'Detective Tempin' },
+  { src: '/assets/game/finding-roxy-bg-2.png',            game: 'Finding Roxy' },
+  { src: '/assets/game/concept-rabbit-hole.png',          game: 'Rabbit Hole' },
+  { src: '/assets/game/fruity-beats-banner.jpg',          game: 'Fruity Beats' },
+  { src: '/assets/game/hh-dean-mason.png',                game: 'Hidden Horror' },
+  { src: '/assets/game/sparkling-amber-screens/3.jpg',    game: 'Sparkling Amber' },
+  { src: '/assets/game/finding-roxy-homescreen.png',      game: 'Finding Roxy' },
+  { src: '/assets/game/scrabble-plus-banner.jpg',         game: 'Scrabble Plus' },
+  { src: '/assets/game/finding-roxy-bg-3.png',            game: 'Finding Roxy' },
+  { src: '/assets/game/concept-rabbit-hole-main.png',     game: 'Rabbit Hole' },
+  { src: '/assets/game/hh-mrs-havishaw.png',              game: 'Hidden Horror' },
+  { src: '/assets/game/sparkling-amber-banner.png',       game: 'Sparkling Amber' },
+  { src: '/assets/game/finding-roxy-bg-4.png',            game: 'Finding Roxy' },
+  { src: '/assets/game/runestrike-banner.png',            game: 'Runestrike' },
+  { src: '/assets/game/concept-dinogami.jpg',             game: 'Dinogami' },
+  { src: '/assets/game/hh-laguardia.png',                 game: 'Hidden Horror' },
+  { src: '/assets/game/sparkling-amber-screens/5.jpg',    game: 'Sparkling Amber' },
+  { src: '/assets/game/the-farm-thing-banner.jpg',        game: 'The Farm Thing' },
+  { src: '/assets/game/finding-roxy-bg-5.png',            game: 'Finding Roxy' },
+];
+
+// 6 game cards
+const games = [
+  {
+    title: "Roxy's Magic Reels",
+    tags: ['Slot + Match-3', 'Browser'],
+    role: 'Original IP',
+    year: 2025,
+    cover: '/assets/game/finding-roxy.png',
+    link: '/games/roxys-magic-reels',
+    isOriginal: true,
+    span: 'wide',
+  },
+  {
+    title: 'Sparkling Amber',
+    tags: ['Match-3', 'Mobile'],
+    role: 'Co-Development',
+    year: 2015,
+    cover: '/assets/game/sparkling-amber.png',
+    link: null,
+    isOriginal: false,
+    span: 'normal',
+  },
+  {
+    title: 'Detective Tempin',
+    tags: ['Hidden Object', 'PC/Mac'],
+    role: 'Co-Development',
+    year: 2013,
+    cover: '/assets/game/detective-tempin.jpg',
+    link: null,
+    isOriginal: false,
+    span: 'normal',
+  },
+  {
+    title: 'Hidden Express',
+    tags: ['Hidden Object', 'Mobile/PC'],
+    role: 'Co-Development',
+    year: 2012,
+    cover: '/assets/game/hidden-express.jpg',
+    link: null,
+    isOriginal: false,
+    span: 'normal',
+  },
+  {
+    title: 'Fruit Salad',
+    tags: ['Casual', 'iPad'],
+    role: 'Full Development',
+    year: 2013,
+    cover: '/assets/game/fruit-salad.jpg',
+    link: null,
+    isOriginal: false,
+    span: 'normal',
+  },
+  {
+    title: 'Vikings Run',
+    tags: ['Runner', 'Mobile'],
+    role: 'Development',
+    year: 2014,
+    cover: '/assets/game/vikings-run-cover.png',
+    link: null,
+    isOriginal: false,
+    span: 'normal',
+  },
+];
+---
+
+<section id="portfolio" class="relative overflow-hidden" style="background: #111111;">
+
+  <!-- Section header -->
+  <div class="max-w-6xl mx-auto px-6 pt-20 pb-10 reveal-up">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+      <div>
+        <Badge variant="red">Track Record</Badge>
+        <!-- Title with explicit white color so it's legible on dark background -->
+        <h2 class="text-4xl lg:text-5xl font-black mt-4" style="color: #FFFFFF; font-family: var(--font-display);">
+          Games We Built
+        </h2>
+        <p class="text-white/50 text-base mt-3 max-w-xl leading-relaxed">
+          Back when games came in cardboard boxes at your local store, Kef Sensei was already
+          in the business of making <span class="text-[#FE953A] font-semibold">FUN</span>.
+          From CD-ROM retail titles to today's live mobile games and browser experiences —
+          some built with partners, some entirely our own — each one a lesson in what makes
+          players come back for more.
+        </p>
+      </div>
+      <a
+        href="/portfolio"
+        class="inline-flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white transition-colors flex-shrink-0 group"
+      >
+        Full portfolio
+        <svg class="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="mt-6 h-px" style="background: linear-gradient(to right, #E63946, transparent);"></div>
+  </div>
+
+  <!-- ── 6 Game Cards (above ticker) ──────────────────────────── -->
+  <div class="max-w-6xl mx-auto px-6 pb-6 reveal-up">
+    <!-- Row 1: Hidden Express (big, 2/3) + Scrabble Plus (1/3) -->
+    <div class="grid grid-cols-3 gap-3 mb-3">
+      <!-- Hidden Express — wide (2/3) -->
+      <div class="col-span-2 group relative rounded-2xl overflow-hidden" style="aspect-ratio: 16/8;">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('/assets/game/hidden-express-banner.jpg');"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-6">
+          <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold text-white mb-3 self-start" style="background: rgba(255,255,255,0.15);">Co-Development</span>
+          <h3 class="text-2xl font-black text-white mb-1" style="font-family: var(--font-display);">Hidden Express</h3>
+          <div class="flex gap-2 flex-wrap mb-2">
+            {['Hidden Object', 'Mobile / PC', '2012'].map((t) => (
+              <span class="text-xs px-2 py-0.5 rounded-full text-white/60" style="background: rgba(255,255,255,0.1);">{t}</span>
+            ))}
+          </div>
+          <p class="text-xs text-white/50 leading-snug max-w-xs">A social hidden-object mystery game across a globe-spanning express train. Millions of players worldwide.</p>
+        </div>
+      </div>
+
+      <!-- Scrabble Plus (1/3) -->
+      <div class="col-span-1 group relative rounded-2xl overflow-hidden" style="aspect-ratio: 9/8;">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('/assets/game/scrabble-plus-banner.jpg');"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 60%);"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-4">
+          <h3 class="text-sm font-bold text-white mb-1 leading-tight" style="font-family: var(--font-display);">Scrabble Plus</h3>
+          <div class="flex gap-1 flex-wrap mb-0.5">
+            <span class="text-xs px-2 py-0.5 rounded-full text-white/60" style="background: rgba(255,255,255,0.1);">Word · PC/Mac</span>
+          </div>
+          <p class="text-xs font-semibold" style="color: rgba(254,149,58,0.8);">Co-Dev · 2010</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 4 equal cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      {[
+        { title: 'Finding Roxy',     tags: ['Slot + Match-3'], role: 'Original · 2026', cover: '/assets/game/finding-roxy-homescreen.png', isOriginal: true },
+        { title: 'Detective Tempin', tags: ['Hidden Object'],  role: 'Co-Dev · 2013',   cover: '/assets/game/detective-tempin-banner.jpg', isOriginal: false },
+        { title: 'Fruit Salad',      tags: ['Casual · iPad'],  role: 'Full Dev · 2013', cover: '/assets/game/fruit-salad.jpg',             isOriginal: false },
+        { title: 'Sparkling Amber',  tags: ['Match-3'],        role: 'Co-Dev · 2015',   cover: '/assets/game/sparkling-amber-banner.png',  isOriginal: false },
+      ].map((g) => (
+        <div class="group relative rounded-xl overflow-hidden" style="aspect-ratio: 3/4;">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={`background-image: url('${g.cover}');`}></div>
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, transparent 100%);"></div>
+          <div class="absolute inset-0 flex flex-col justify-end p-3">
+            {g.isOriginal && (
+              <span class="inline-block px-2 py-0.5 rounded text-white self-start mb-1.5" style="background: linear-gradient(135deg, #E63946, #FE953A); font-size: 9px; font-weight: 800; letter-spacing: 0.05em;">ORIGINAL IP</span>
+            )}
+            <h3 class="text-sm font-bold text-white mb-1 leading-tight" style="font-family: var(--font-display);">{g.title}</h3>
+            <div class="flex gap-1 flex-wrap mb-0.5">
+              {g.tags.map((t) => (
+                <span class="text-white/60" style="background: rgba(255,255,255,0.1); font-size: 10px; padding: 2px 6px; border-radius: 4px;">{t}</span>
+              ))}
+            </div>
+            <p class="font-semibold" style="color: rgba(254,149,58,0.85); font-size: 10px;">{g.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ── Scrolling screenshot ticker (below cards) ─────────────── -->
+  <div class="relative overflow-hidden py-4 reveal-up" style="mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);">
+    <div class="flex gap-4 ticker-track" aria-hidden="true">
+      {[...screenshots, ...screenshots].map((shot) => (
+        <div class="flex-shrink-0 relative rounded-xl overflow-hidden group" style="width: 260px; height: 155px;">
+          <img src={shot.src} alt={shot.game + ' screenshot'} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            <span class="text-white text-xs font-semibold">{shot.game}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ── Credits row ───────────────────────────────────────────── -->
+  <div class="max-w-6xl mx-auto px-6 pt-6 pb-20 reveal-up">
+    <div class="rounded-2xl overflow-hidden" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+      <div class="px-8 pt-6 pb-4 border-b border-white/5">
+        <p class="text-white font-bold text-base" style="font-family: var(--font-display);">Also in our credits</p>
+        <p class="text-white/40 text-sm mt-1 leading-relaxed">
+          Beyond our headlining titles, the Kef Sensei team has left their mark on these
+          published games — contributing production support, gameplay features, and QA across
+          some of the most beloved casual franchises of the era.
+        </p>
+      </div>
+      <div class="px-8 py-5 flex flex-wrap gap-3">
+        {['Hotel Dash', 'Hotel Dash 2', 'Parking Dash', 'Garden Dash', 'Scrabble Plus', 'Runestrike'].map((game) => (
+          <span class="px-4 py-2 rounded-full text-sm font-semibold text-white/70 border border-white/10 hover:border-white/30 hover:text-white transition-all cursor-default">
+            {game}
+          </span>
+        ))}
+      </div>
+      <div class="px-8 pb-6">
+        <a
+          href="/portfolio"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white transition-all hover:opacity-90"
+          style="background: linear-gradient(135deg, #E63946, #FE953A);"
+        >
+          View Full Portfolio
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .ticker-track {
+    animation: ticker 40s linear infinite;
+    width: max-content;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+</style>

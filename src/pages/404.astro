@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import GradientMesh from '@/components/ui/GradientMesh.astro';
+---
+
+<BaseLayout title="404 — Page Not Found | Kef Sensei" description="This page doesn't exist.">
+  <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <GradientMesh preset="hero" />
+    <div class="text-center space-y-6 px-6">
+      <div class="text-8xl">🎰</div>
+      <h1 class="text-5xl font-black" style="font-family: var(--font-display);">
+        No Match Found!
+      </h1>
+      <p class="text-lg text-[#5C4A3A] max-w-md mx-auto">
+        Looks like this page spun out of the grid. Let's get you back to something fun.
+      </p>
+      <Button href="/" size="lg" glow>Back to Home</Button>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,106 @@
+/* ─── Google Fonts (must precede @import 'tailwindcss') ─────── */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+@theme {
+  /* Brand colors (from Kef Sensei 2016 identity) */
+  --color-brand-red:        #E63946;
+  --color-brand-orange:     #FE953A;
+  --color-brand-orange-lt:  #FFB347;
+  --color-brand-dark:       #0D0D0D;
+
+  /* Backgrounds — neutral clean base so brand colors pop */
+  --color-bg-base:          #FFFFFF;
+  --color-bg-subtle:        #F4F4F5;
+  --color-bg-card:          #FFFFFF;
+
+  /* Text — neutral greys, high contrast */
+  --color-text-primary:     #111111;
+  --color-text-secondary:   #4B5563;
+  --color-text-muted:       #9CA3AF;
+
+  /* Gradient mesh anchors — subtler, cleaner */
+  --color-mesh-peach:       #FFF0E8;
+  --color-mesh-honey:       #FFF8E8;
+  --color-mesh-rose:        #FFEAEA;
+  --color-mesh-cream:       #FFFFFF;
+
+  /* Typography */
+  --font-display:           'Nunito', system-ui, sans-serif;
+  --font-body:              'Inter', system-ui, sans-serif;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+/* ─── CSS Animations (zero JS) ──────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(254, 149, 58, 0.45); }
+  50%       { box-shadow: 0 0 0 14px rgba(254, 149, 58, 0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Utility classes ────────────────────────────────────────── */
+.animate-float      { animation: float 4s ease-in-out infinite; }
+.animate-glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
+.animate-fade-up    { animation: fadeUp 0.6s ease-out both; }
+
+/* ─── Glass card ─────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 1rem;
+}
+
+/* ─── Section spacing ────────────────────────────────────────── */
+.section {
+  padding-block: 5rem;
+}
+@media (min-width: 1024px) {
+  .section {
+    padding-block: 7rem;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

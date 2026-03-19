@@ -1,0 +1,22 @@
+---
+interface Props {
+  preset?: 'hero' | 'services' | 'portfolio' | 'about' | 'contact';
+  class?: string;
+}
+
+const { preset = 'hero', class: className = '' } = Astro.props;
+
+const gradients = {
+  hero:      'radial-gradient(ellipse at 20% 40%, #FFE8D6 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, #FFF0CC 0%, transparent 55%), radial-gradient(ellipse at 60% 80%, #FFD6D6 0%, transparent 55%), #FAFAF8',
+  services:  'radial-gradient(ellipse at 10% 60%, #FFF4EE 0%, transparent 60%), radial-gradient(ellipse at 90% 30%, #FFE8D6 0%, transparent 60%), #FFF9F5',
+  portfolio: 'radial-gradient(ellipse at 50% 0%, #FFE8D6 0%, transparent 60%), radial-gradient(ellipse at 80% 90%, #FFF0CC 0%, transparent 50%), #FAFAF8',
+  about:     'radial-gradient(ellipse at 0% 50%, #FFD6D6 0%, transparent 55%), radial-gradient(ellipse at 100% 50%, #FFF0CC 0%, transparent 55%), #FFF9F5',
+  contact:   'radial-gradient(ellipse at 50% 50%, #FFE8D6 0%, transparent 70%), #FAFAF8',
+};
+---
+
+<div
+  aria-hidden="true"
+  class:list={['absolute inset-0 -z-10', className]}
+  style={`background: ${gradients[preset]};`}
+></div>
