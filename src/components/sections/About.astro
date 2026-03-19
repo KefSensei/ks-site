@@ -1,0 +1,358 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+
+const milestones = [
+  { year: '1997', label: 'Fruit Salad',               shipped: true  },
+  { year: '2007', label: 'Studio Founded',             shipped: true,  isFounder: true },
+  { year: '2009', label: 'Hotel Dash · Scrabble Plus', shipped: true  },
+  { year: '2010', label: 'Parking Dash',               shipped: true  },
+  { year: '2011', label: 'Hotel Dash 2 · Garden Dash', shipped: true  },
+  { year: '2013', label: 'Sparkling Amber',            shipped: true  },
+  { year: '2014', label: 'Hidden Express',             shipped: true  },
+  { year: '2017', label: 'Fruity Beats',               shipped: false },
+  { year: '2018', label: 'Detective Tempin',           shipped: false },
+  { year: '2020', label: 'Runestrike',                 shipped: true  },
+  { year: '2022', label: 'Rabbit Hole',                shipped: false },
+  { year: '2024', label: 'Finding Roxy',               shipped: false },
+  { year: '2026', label: "Roxy's Magic Reels",         shipped: false, isCurrent: true },
+];
+
+const chars = [
+  { src: '/assets/studio/sensei-ready-tp.png',      idle: 'idle-float',    accent: '#E63946' },
+  { src: '/assets/studio/sensei-welcome-tp.png',    idle: 'idle-sway',     accent: '#3B82F6' },
+  { src: '/assets/studio/sensei-meditation-tp.png', idle: 'idle-meditate', accent: '#10B981' },
+  { src: '/assets/studio/sensei-students-tp.png',   idle: 'idle-bounce',   accent: '#FE953A' },
+];
+
+// Cycle duration constants (must match CSS)
+// Total cycle = 20s, each char shows for 5s
+---
+
+<section id="about" class="relative overflow-hidden bg-white">
+
+  <div class="section max-w-6xl mx-auto px-6">
+
+    <!-- Heading + badge -->
+    <div class="mb-10 reveal-up">
+      <Badge variant="orange">Our Story</Badge>
+      <h2 class="text-4xl lg:text-5xl font-black mt-4 text-[#111111]" style="font-family: var(--font-display);">
+        Crafted with<br />
+        <span style="background: linear-gradient(135deg, #E63946 0%, #FE953A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          Purpose &amp; FUN
+        </span>
+      </h2>
+    </div>
+
+    <!-- ── Timeline ──────────────────────────────────────────── -->
+    <div class="mb-12 reveal-up">
+      <!-- Legend -->
+      <div class="flex items-center gap-4 mb-4 text-xs text-[#6B7280]">
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#E63946;"></span>Shipped
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#FE953A; opacity:0.7;"></span>In Development
+        </span>
+      </div>
+      <div class="relative flex items-start gap-0 overflow-x-auto pb-4">
+        <div class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none" style="background: linear-gradient(to right, #E63946 0%, #E63946 55%, #FE953A 75%, #E5E7EB 100%);"></div>
+        {milestones.map((m) => (
+          <div class="relative flex-1 min-w-[80px] group cursor-default">
+            <div
+              class="relative z-10 w-5 h-5 rounded-full flex items-center justify-center mx-auto transition-transform duration-200 group-hover:scale-125"
+              style={m.isCurrent
+                ? 'background: linear-gradient(135deg, #E63946, #FE953A); box-shadow: 0 0 12px rgba(230,57,70,0.5);'
+                : m.isFounder
+                  ? 'background: #111111; border: 2px solid #111111;'
+                  : m.shipped
+                    ? 'background: #FFFFFF; border: 2px solid #E63946;'
+                    : 'background: #FFFFFF; border: 2px solid #FE953A;'}
+            >
+              {m.isCurrent && <span class="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>}
+            </div>
+            <p class="text-center text-[10px] font-black mt-2 leading-none"
+               style={m.isCurrent ? 'color:#E63946;' : m.isFounder ? 'color:#111111;' : m.shipped ? 'color:#111111;' : 'color:#FE953A;'}>
+              {m.year}
+            </p>
+            <p class="text-center text-[9px] mt-1 px-0.5 leading-tight transition-colors duration-200"
+               style={m.shipped || m.isFounder ? 'color:#6B7280;' : 'color:#FE953A; opacity:0.85;'}>
+              {m.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── 2-col: copy left, carousel right ─────────────────── -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Left: copy -->
+      <div class="space-y-5 reveal-up">
+        <p class="text-lg text-[#4B5563] leading-relaxed">
+          We started Kef Sensei with a simple obsession: make games people genuinely love.
+          Not just functional games — games with soul. The kind that spark a real laugh,
+          keep you up way too late, and deliver that perfect "just one more level" hit of
+          pure, uncut <strong class="font-bold" style="color: #E63946;">FUN</strong>.
+        </p>
+        <p class="text-base text-[#4B5563] leading-relaxed">
+          Since 2007 we have been doing exactly that. We started when games still came in
+          cardboard boxes on retail shelves — CD-ROMs, physical instruction booklets,
+          the whole thing. From there we evolved with the industry: app stores, live-ops,
+          browser games, and now AI-powered pipelines. Through it all, one constant: we
+          care deeply about making something players actually enjoy.
+        </p>
+        <p class="text-base text-[#4B5563] leading-relaxed">
+          We have built our own original titles and worked shoulder-to-shoulder with
+          publishers across the Americas, Europe, and Asia — some short sprints, some
+          multi-year partnerships. The common thread is trust. Clients return because
+          we deliver what we promise and we care about the
+          <strong class="font-bold" style="color: #E63946;">FUN</strong> as much as they do.
+        </p>
+        <p class="text-base text-[#4B5563] leading-relaxed">
+          Our studio is small by design. A tight, senior team — real developers, real
+          designers, real producers who have shipped real games and carry the scars and
+          wisdom to prove it. No juniors doing the heavy lifting, no smoke and mirrors.
+          Just people who love craft and genuinely want your project to succeed.
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-4 pt-2">
+          {[
+            { num: '2007', label: 'Founded' },
+            { num: '10+',  label: 'Shipped Titles' },
+            { num: '∞',    label: 'FUN Delivered' },
+          ].map(({ num, label }) => (
+            <div class="rounded-xl p-4 text-center border border-[#E5E7EB]">
+              <div class="text-2xl font-black" style="font-family: var(--font-display); background: linear-gradient(135deg, #E63946, #FE953A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">{num}</div>
+              <div class="text-xs font-semibold mt-1" style="color: #9CA3AF;">{label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Cycling character carousel -->
+      <div class="reveal-up" id="sensei-panel">
+
+        <!-- Main stage (no background/border — transparent images float freely) -->
+        <div class="sensei-stage" id="sensei-stage"
+          data-chars={JSON.stringify(chars.map(c => ({ accent: c.accent })))}>
+
+          <!-- Character frames (all hidden; JS makes one active at a time) -->
+          {chars.map((c, i) => (
+            <div class={`char-frame${i === 0 ? ' is-active' : ''}`} data-idx={i}>
+              <img
+                src={c.src}
+                alt="Kef Sensei character"
+                class={`char-img ${c.idle}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
+
+          <!-- Progress dots -->
+          <div class="stage-dots">
+            {chars.map((c, i) => (
+              <span
+                class={`stage-dot${i === 0 ? ' is-active' : ''}`}
+                data-accent={c.accent}
+                style={i === 0 ? `background: ${c.accent}; width: 20px; opacity: 1;` : ''}
+              ></span>
+            ))}
+          </div>
+
+        </div>
+
+        <!-- Quote card -->
+        <div class="mt-5 rounded-2xl p-5 border border-[#E5E7EB] bg-[#F9F9F9]">
+          <p class="font-bold text-[#111111] leading-relaxed" style="font-family: var(--font-display);">
+            "After nineteen years, one truth never changes: <span style="color:#E63946;">FUN</span> is not a feature you add at the end. It's the whole point — and we've never once stopped treating it that way."
+          </p>
+          <p class="text-xs font-semibold mt-3" style="color: #9CA3AF;">— Kef Sensei Studio, Est. 2007</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Stage container ─────────────────────────────────── */
+  .sensei-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 480px;
+    overflow: hidden;
+  }
+
+  /* ── Character frame ────────────────────────────────── */
+  .char-frame {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 44px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(40px) scale(0.8) rotate(-3deg);
+    transition: opacity 0s, transform 0s; /* overridden by is-entering / is-exiting */
+    pointer-events: none;
+  }
+
+  /* ENTER: character pops up from below with overshoot */
+  @keyframes frameEnter {
+    0%   { opacity: 0; transform: translateY(50px) scale(0.78) rotate(-4deg); }
+    55%  { opacity: 1; transform: translateY(-6px)  scale(1.03) rotate(1deg);  }
+    75%  { opacity: 1; transform: translateY(2px)   scale(0.99) rotate(0deg);  }
+    100% { opacity: 1; transform: translateY(0)     scale(1)    rotate(0deg);  }
+  }
+
+  /* EXIT: floats up and away */
+  @keyframes frameExit {
+    0%   { opacity: 1; transform: translateY(0)     scale(1)    rotate(0deg);  }
+    100% { opacity: 0; transform: translateY(-50px) scale(1.05) rotate(4deg);  }
+  }
+
+  .char-frame.is-active {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  .char-frame.is-entering {
+    animation: frameEnter 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .char-frame.is-exiting {
+    animation: frameExit 0.4s ease-in forwards;
+  }
+
+  /* ── Character images — idle motion ─────────────────── */
+  .char-img {
+    max-width: 78%;
+    max-height: 82%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.14));
+  }
+
+  @keyframes idleFloat    { 0%,100%{transform:translateY(0)}      50%{transform:translateY(-12px)} }
+  @keyframes idleSway     { 0%,100%{transform:rotate(-3deg)}      50%{transform:rotate(3deg) scale(1.03)} }
+  @keyframes idleMeditate { 0%,100%{transform:translateY(0)}      50%{transform:translateY(-6px) scale(1.02)} }
+  @keyframes idleBounce   {
+    0%,100%{transform:translateY(0) scaleY(1)}
+    40%{transform:translateY(-14px) scaleY(1.04)}
+    55%{transform:translateY(0) scaleY(0.96)}
+    65%{transform:translateY(-5px)}
+  }
+
+  .idle-float    { animation: idleFloat    3.8s ease-in-out infinite; }
+  .idle-sway     { animation: idleSway     4.2s ease-in-out infinite 0.3s; }
+  .idle-meditate { animation: idleMeditate 5.5s ease-in-out infinite 0.8s; }
+  .idle-bounce   { animation: idleBounce   2.2s ease-in-out infinite 0.5s; }
+
+  /* ── Progress dots ───────────────────────────────────── */
+  .stage-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .stage-dot {
+    height: 6px;
+    width: 6px;
+    border-radius: 999px;
+    background: #D1D5DB;
+    opacity: 0.5;
+    transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  }
+  .stage-dot.is-active {
+    width: 20px;
+    opacity: 1;
+  }
+
+  /* Ensure entering frame renders above exiting one */
+  .char-frame.is-entering { z-index: 4 !important; }
+  .char-frame.is-exiting  { z-index: 2; }
+  .char-frame.is-active   { z-index: 3; }
+
+  /* ── Reduced motion ──────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .char-frame.is-entering, .char-frame.is-exiting { animation: none; }
+    .idle-float, .idle-sway, .idle-meditate, .idle-bounce { animation: none; }
+  }
+</style>
+
+<script>
+(function () {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Data ─────────────────────────────────────────────── */
+  const stage  = document.getElementById('sensei-stage') as HTMLElement | null;
+  if (!stage) return;
+
+  const frames = Array.from(stage.querySelectorAll<HTMLElement>('.char-frame'));
+  const dots   = Array.from(stage.querySelectorAll<HTMLElement>('.stage-dot'));
+  const meta   = JSON.parse(stage.dataset.chars ?? '[]') as { accent: string }[];
+
+  let current = 0;
+  const HOLD  = 4500;   // ms each character stays visible
+
+  /* ── Transition ───────────────────────────────────────── */
+  function goTo(next: number) {
+    if (next === current) return;
+    const prev = current;
+    current    = next;
+
+    const prevFrame = frames[prev];
+    const nextFrame = frames[next];
+
+    /* --- Exit previous --- */
+    prevFrame.classList.remove('is-active', 'is-entering');
+    if (!reduced) {
+      prevFrame.classList.add('is-exiting');
+      setTimeout(() => prevFrame.classList.remove('is-exiting'), 450);
+    }
+
+    /* --- Enter next: set is-active immediately so it holds after animation --- */
+    nextFrame.classList.remove('is-exiting');
+    nextFrame.classList.add('is-active');
+    if (!reduced) {
+      nextFrame.classList.add('is-entering');                  // triggers frameEnter keyframe
+      setTimeout(() => nextFrame.classList.remove('is-entering'), 620); // cleanup after anim
+    }
+
+    /* --- Dots --- */
+    dots.forEach((d, i) => {
+      const active = i === next;
+      d.classList.toggle('is-active', active);
+      d.style.background = active ? (meta[i]?.accent ?? '#E63946') : '';
+    });
+  }
+
+  /* ── Auto-advance ─────────────────────────────────────── */
+  let timer = setInterval(() => goTo((current + 1) % frames.length), HOLD);
+
+  /* ── Parallax on scroll ──────────────────────────────── */
+  if (!reduced) {
+    const host = document.getElementById('sensei-panel');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (host) {
+            const progress = -host.getBoundingClientRect().top / window.innerHeight;
+            stage.style.transform = `translateY(${progress * -14}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+})();
+</script>

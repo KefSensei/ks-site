@@ -1,0 +1,226 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+
+const games = [
+  // ── Original games ─────────────────────────────────────
+  {
+    title: "Roxy's Magic Reels",
+    subtitle: 'Hybrid Slot + Match-3 Browser Game',
+    role: 'Full Development (Original IP)',
+    year: 2025,
+    platforms: ['Browser', 'TypeScript', 'PixiJS 8'],
+    tags: ['Slot', 'Match-3', 'Casual'],
+    isOriginal: true,
+    cover: '/assets/game/finding-roxy.png',
+    screenshots: [
+      '/assets/game/finding-roxy-gameplay.png',
+      '/assets/game/finding-roxy-levels.jpg',
+      '/assets/game/finding-roxy-map.png',
+    ],
+    description:
+      'Our in-progress original IP — a fresh twist on casual gaming that blends slot-machine reel drops with strategic match-3 puzzles. Play as Roxy, a halfling adventurer, across 20 handcrafted levels in two magical worlds. Features adaptive progressive music, drag-to-swap mechanics, Fibonacci cascade multipliers, and power-up creation.',
+    link: '/games/roxys-magic-reels',
+  },
+  // ── Co-developed / WFH titles ───────────────────────────
+  {
+    title: 'Sparkling Amber',
+    subtitle: 'Casual Match-3 Puzzle',
+    role: 'Co-Development',
+    year: 2015,
+    platforms: ['iOS', 'Android'],
+    tags: ['Match-3', 'Casual', 'Mobile'],
+    isOriginal: false,
+    cover: '/assets/game/sparkling-amber.png',
+    screenshots: [
+      '/assets/game/sparkling-amber-screens/1.jpg',
+      '/assets/game/sparkling-amber-screens/2.jpg',
+      '/assets/game/sparkling-amber-screens/4.jpg',
+    ],
+    description:
+      'A charming casual match-3 with a glittering gem aesthetic and relaxing gameplay loop. We co-developed core mechanics, level design systems, and mobile UX — helping the title reach a global casual audience.',
+    link: null,
+  },
+  {
+    title: 'Detective Tempin',
+    subtitle: 'Hidden Object Adventure',
+    role: 'Co-Development',
+    year: 2013,
+    platforms: ['PC', 'Mac'],
+    tags: ['Hidden Object', 'Adventure', 'PC/Mac'],
+    isOriginal: false,
+    cover: '/assets/game/detective-tempin.jpg',
+    screenshots: [],
+    description:
+      'A rich hidden-object adventure set in a mystery-laden world. We contributed to the production pipeline, gameplay feature development, and QA processes — helping bring this PC/Mac title to market.',
+    link: null,
+  },
+  {
+    title: 'Hidden Express',
+    subtitle: 'Hidden Object on Rails',
+    role: 'Co-Development',
+    year: 2012,
+    platforms: ['iOS', 'Android', 'PC'],
+    tags: ['Hidden Object', 'Casual', 'Mobile/PC'],
+    isOriginal: false,
+    cover: '/assets/game/hidden-express.jpg',
+    screenshots: [],
+    description:
+      'A fast-paced hidden object game set on a speeding train. We worked on gameplay systems and content production, contributing to a cross-platform release that reached millions of players.',
+    link: null,
+  },
+  {
+    title: 'Fruit Salad',
+    subtitle: 'Casual iPad Match Game',
+    role: 'Full Development',
+    year: 2013,
+    platforms: ['iPad'],
+    tags: ['Casual', 'Match', 'iPad'],
+    isOriginal: false,
+    cover: '/assets/game/fruit-salad.jpg',
+    screenshots: [],
+    description:
+      'One of our early full-development titles — a bright and cheerful casual match game built specifically for iPad. We handled end-to-end development from concept through App Store launch.',
+    link: null,
+  },
+];
+
+// Credits-only titles
+const credits = [
+  { title: 'Hotel Dash', year: 2011, platform: 'PC/Mac/Mobile', publisher: 'PlayFirst' },
+  { title: 'Hotel Dash 2', year: 2012, platform: 'PC/Mac/Mobile', publisher: 'PlayFirst' },
+  { title: 'Parking Dash', year: 2011, platform: 'PC/Mac', publisher: 'PlayFirst' },
+  { title: 'Garden Dash', year: 2011, platform: 'PC/Mac', publisher: 'PlayFirst' },
+  { title: 'Scrabble Plus', year: 2010, platform: 'PC', publisher: 'Atari' },
+  { title: 'Runestrike', year: 2012, platform: 'Browser', publisher: 'Independent' },
+];
+---
+
+<BaseLayout
+  title="Portfolio | Kef Sensei"
+  description="19+ years of shipped games — from original IPs to co-development with global publishers. Our full portfolio of titles across casual, hidden object, match-3, and more."
+>
+  <!-- Hero header -->
+  <section class="relative overflow-hidden pt-32 pb-16" style="background: #111111;">
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 30% 50%, rgba(230,57,70,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(254,149,58,0.08) 0%, transparent 60%);"></div>
+    <div class="max-w-6xl mx-auto px-6 relative">
+      <Badge variant="red">Our Work</Badge>
+      <h1 class="text-4xl lg:text-6xl font-black text-white mt-4 mb-4" style="font-family: var(--font-display);">
+        Built &amp; Shipped
+      </h1>
+      <p class="text-white/60 text-lg max-w-xl leading-relaxed">
+        19+ years. 10+ shipped titles. From our own original IPs to co-development with
+        studios and publishers across the globe.
+      </p>
+      <a href="/" class="inline-flex items-center gap-2 mt-6 text-sm text-white/40 hover:text-white/70 transition-colors">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to Home
+      </a>
+    </div>
+  </section>
+
+  <!-- Main games -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6 space-y-24">
+      {games.map((game, i) => (
+        <div class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start reveal-up ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+
+          <!-- Images side -->
+          <div class={`space-y-3 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+            <!-- Cover -->
+            <div class="rounded-2xl overflow-hidden shadow-lg" style="aspect-ratio: 16/9;">
+              <img src={game.cover} alt={game.title} class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <!-- Screenshots strip -->
+            {game.screenshots.length > 0 && (
+              <div class="grid grid-cols-3 gap-2">
+                {game.screenshots.map((s) => (
+                  <div class="rounded-lg overflow-hidden" style="aspect-ratio: 4/3;">
+                    <img src={s} alt="" class="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <!-- Text side -->
+          <div class={`space-y-5 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div>
+              {game.isOriginal && (
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3" style="background: linear-gradient(135deg, #E63946, #FE953A); color: white;">
+                  Original IP
+                </span>
+              )}
+              <h2 class="text-3xl font-black text-[#111111]" style="font-family: var(--font-display);">{game.title}</h2>
+              <p class="text-[#4B5563] mt-1">{game.subtitle}</p>
+            </div>
+
+            <p class="text-[#4B5563] leading-relaxed">{game.description}</p>
+
+            <div class="space-y-3">
+              <div class="flex flex-wrap gap-2">
+                {game.tags.map((t) => (
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold text-[#111111]" style="background: #F4F4F5;">{t}</span>
+                ))}
+              </div>
+              <div class="grid grid-cols-3 gap-4 pt-2">
+                {[
+                  { label: 'Year', value: String(game.year) },
+                  { label: 'Role', value: game.role },
+                  { label: 'Platform', value: game.platforms[0] },
+                ].map(({ label, value }) => (
+                  <div>
+                    <div class="text-xs font-bold uppercase tracking-widest" style="color: #9CA3AF;">{label}</div>
+                    <div class="text-sm font-semibold text-[#111111] mt-0.5">{value}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {game.link && (
+              <a
+                href={game.link}
+                class="inline-flex items-center gap-2 text-sm font-bold text-[#E63946] hover:text-[#FE953A] transition-colors"
+              >
+                View game page
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Credits section -->
+  <section class="py-20" style="background: #F4F4F5;">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-10 reveal-up">
+        <Badge variant="dark">Further Credits</Badge>
+        <h2 class="text-2xl font-black text-[#111111] mt-3" style="font-family: var(--font-display);">Also Contributed To</h2>
+        <p class="text-[#4B5563] text-sm mt-2 max-w-lg">Production support, feature development, and QA contributions across these additional published titles.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal-up">
+        {credits.map((c) => (
+          <div class="bg-white rounded-xl px-5 py-4 border border-[#E5E7EB]">
+            <div class="font-bold text-[#111111]" style="font-family: var(--font-display);">{c.title}</div>
+            <div class="text-xs text-[#9CA3AF] mt-1">{c.platform} · {c.year}</div>
+            {c.publisher !== 'Independent' && (
+              <div class="text-xs font-semibold mt-1" style="color: #E63946;">{c.publisher}</div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center reveal-up">
+        <p class="text-[#4B5563] mb-4">Want to be the next game we help ship?</p>
+        <Button href="/#contact" size="lg" glow>
+          Let's Work Together
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

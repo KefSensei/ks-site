@@ -1,0 +1,70 @@
+---
+import logoNegative from '@/assets/logo/logo-negative.png';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[#1A1210] text-white/80 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
+
+      <!-- Brand -->
+      <div class="space-y-4">
+        <img
+          src={logoNegative.src}
+          alt="Kef Sensei"
+          class="h-10 w-auto object-contain"
+          loading="lazy"
+        />
+        <p class="text-sm leading-relaxed text-white/60">
+          Masters of Game Development since 2007.<br />
+          We Master Fun.
+        </p>
+      </div>
+
+      <!-- Nav links -->
+      <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Navigate</h3>
+        <ul class="space-y-2 list-none m-0 p-0">
+          {[
+            { href: '/#services',  label: 'Services' },
+            { href: '/#portfolio', label: 'Our Work' },
+            { href: '/#about',     label: 'About Us' },
+            { href: '/#contact',   label: 'Contact' },
+            { href: '/games/roxys-magic-reels', label: "Roxy's Magic Reels" },
+          ].map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-sm text-white/60 hover:text-[#FE953A] transition-colors no-underline">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Get in Touch</h3>
+        <a
+          href="mailto:info@kefsensei.com"
+          class="text-sm text-white/60 hover:text-[#FE953A] transition-colors no-underline block mb-2"
+        >
+          info@kefsensei.com
+        </a>
+        <p class="text-sm text-white/40 mt-4">
+          Have a game idea or project?<br />
+          We'd love to hear from you.
+        </p>
+      </div>
+    </div>
+
+    <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/30">
+      <p>&copy; {year} Kef Sensei. All rights reserved.</p>
+      <div class="flex items-center gap-5">
+        <a href="/privacy-policy" class="hover:text-white/60 transition-colors no-underline">Privacy Policy</a>
+        <span class="text-white/15">|</span>
+        <a href="/terms-of-use" class="hover:text-white/60 transition-colors no-underline">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>

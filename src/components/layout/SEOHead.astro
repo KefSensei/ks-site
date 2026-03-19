@@ -1,0 +1,60 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = 'Kef Sensei | Masters of Game Development',
+  description = 'Independent game studio founded in 2007. We build casual games, prototype rapidly, and partner with studios worldwide. We Master Fun.',
+  ogImage = '/og-default.png',
+  canonicalURL = Astro.url.href,
+  type = 'website',
+} = Astro.props;
+
+const siteName = 'Kef Sensei';
+const fullTitle = title.includes('Kef Sensei') ? title : `${title} | Kef Sensei`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Kef Sensei',
+  url: 'https://kefsensei.com',
+  description,
+  foundingDate: '2007',
+  email: 'info@kefsensei.com',
+  sameAs: ['https://github.com/KefSensei'],
+};
+---
+
+<!-- Primary -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<link rel="icon" type="image/png" href="/favicon.png" />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+<meta property="og:url" content={canonicalURL} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+
+<!-- Fonts preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />

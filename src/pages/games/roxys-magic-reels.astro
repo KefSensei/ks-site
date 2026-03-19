@@ -1,0 +1,180 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import GradientMesh from '@/components/ui/GradientMesh.astro';
+
+const gameSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: "Roxy's Magic Reels",
+  description:
+    "A hybrid Slot + Match-3 casual browser game featuring Roxy the halfling adventurer across 20 levels in 2 magical worlds.",
+  genre: ['Casual', 'Puzzle', 'Match 3', 'Slot'],
+  gamePlatform: 'Web Browser',
+  applicationCategory: 'Game',
+  operatingSystem: 'Any',
+  author: {
+    '@type': 'Organization',
+    name: 'Kef Sensei',
+    url: 'https://kefsensei.com',
+  },
+};
+---
+
+<BaseLayout
+  title="Roxy's Magic Reels | Kef Sensei"
+  description="A hybrid Slot + Match-3 casual browser game. 20 levels, 2 magical worlds, drag-to-swap mechanics, and a progressive music system. Built with PixiJS 8 & TypeScript."
+  ogImage="/og-roxy.png"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(gameSchema)} />
+
+  <!-- Hero -->
+  <section class="relative min-h-[60vh] flex items-center overflow-hidden">
+    <div
+      class="absolute inset-0 -z-10"
+      style="background-image: url('/assets/game/menu-bg-landscape.png'); background-size: cover; background-position: center top;"
+    ></div>
+    <div class="absolute inset-0 -z-10 bg-[#1A1210]/60"></div>
+
+    <div class="max-w-6xl mx-auto px-6 py-24 text-white">
+      <div class="max-w-2xl space-y-6">
+        <Badge variant="red">★ Our Original Game</Badge>
+        <h1 class="text-5xl lg:text-6xl font-black" style="font-family: var(--font-display);">
+          Roxy's Magic Reels
+        </h1>
+        <p class="text-lg text-white/80 leading-relaxed">
+          A fresh twist on casual gaming — blending the excitement of slot machines with the
+          strategy of match-3 puzzles. Play as Roxy, a halfling adventurer, across 20 levels
+          in two magical worlds.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <Button variant="primary" size="lg" glow>
+            Play Now (Coming Soon)
+          </Button>
+          <Button href="/#portfolio" variant="outline" size="md" class="border-white text-white hover:bg-white hover:text-[#1A1210]">
+            See All Our Work
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details -->
+  <section class="relative section overflow-hidden">
+    <GradientMesh preset="hero" />
+
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Features -->
+        <div class="space-y-8">
+          <div>
+            <Badge variant="orange">What Makes It Special</Badge>
+            <h2 class="text-3xl font-black mt-4" style="font-family: var(--font-display);">
+              Slot + Match-3 Hybrid
+            </h2>
+            <p class="text-[#5C4A3A] mt-3 leading-relaxed">
+              After each spin, symbols fall slot-style into the 5×5 grid. Then it's your turn —
+              drag-swap adjacent gems to create matches, trigger cascades, and maximise your score.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: '5×5 Reel Grid',
+                desc: 'Column-by-column reel drop with per-column spin speeds',
+                svg: '<rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="9" y1="2" x2="9" y2="22" stroke="currentColor" stroke-width="1.5"/><line x1="15" y1="2" x2="15" y2="22" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="9" x2="22" y2="9" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5"/>',
+              },
+              {
+                title: '12 Symbol Types',
+                desc: 'Gems, potions, wilds, scatters, and multiplier orbs',
+                svg: '<polygon points="12,2 15.5,8.5 23,9.5 17.5,15 19,22.5 12,19 5,22.5 6.5,15 1,9.5 8.5,8.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>',
+              },
+              {
+                title: '20 Levels',
+                desc: '2 worlds: Enchanted Meadow & Crystal Caverns',
+                svg: '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+              },
+              {
+                title: 'Fibonacci Multipliers',
+                desc: 'Cascade combos up to 21× multiplier',
+                svg: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>',
+              },
+              {
+                title: 'Progressive Music',
+                desc: '10-stem adaptive soundtrack by "Finding Roxy"',
+                svg: '<path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+              },
+              {
+                title: 'Power-Ups',
+                desc: 'Blast, Bomb & Rainbow for 4-5+ matches',
+                svg: '<path d="M12 2a7 7 0 017 7c0 4-3 6-4 9H9c-1-3-4-5-4-9a7 7 0 017-7z" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="9" y1="22" x2="15" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+              },
+            ].map(({ svg, title, desc }) => (
+              <div class="glass p-4 flex gap-3">
+                <span class="flex-shrink-0 w-6 h-6 text-[#E63946]" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" set:html={svg} />
+                </span>
+                <div>
+                  <div class="font-bold text-sm" style="font-family: var(--font-display);">{title}</div>
+                  <div class="text-xs text-[#5C4A3A] mt-0.5">{desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Tech stack + symbols -->
+        <div class="space-y-8">
+          <div>
+            <Badge variant="dark">Built With</Badge>
+            <h2 class="text-3xl font-black mt-4" style="font-family: var(--font-display);">
+              Modern Web Tech
+            </h2>
+            <div class="flex flex-wrap gap-2 mt-4">
+              {['PixiJS 8', 'TypeScript', 'GSAP 3', 'Howler.js', 'Vite', 'Web Audio API'].map((tech) => (
+                <span class="px-3 py-1 rounded-full text-sm font-medium bg-[#1A1210] text-white">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Symbol showcase -->
+          <div>
+            <div class="text-sm font-semibold text-[#9C8578] mb-3">Symbol Gallery</div>
+            <div class="grid grid-cols-6 gap-3">
+              {[
+                'symbol-ruby', 'symbol-emerald', 'symbol-sapphire',
+                'symbol-amethyst', 'symbol-topaz', 'symbol-potion',
+                'symbol-roxy', 'symbol-scatter', 'symbol-multiplier',
+                'symbol-crystal', 'symbol-mushroom', 'symbol-bat',
+              ].map((sym) => (
+                <div class="glass p-2 flex items-center justify-center aspect-square rounded-xl">
+                  <img
+                    src={`/assets/game/${sym}.png`}
+                    alt={sym.replace('symbol-', '')}
+                    class="w-full h-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Game preview -->
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="/assets/game/menu-bg-landscape.png"
+              alt="Roxy's Magic Reels — menu screen"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
