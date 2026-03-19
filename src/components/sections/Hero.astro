@@ -1,6 +1,22 @@
 ---
 import Button from '@/components/ui/Button.astro';
 
+// Game scene images — dark collage backdrop (4×3 grid, staggered pulse)
+const sceneBg = [
+  '/assets/art-samples/SA_1.jpg',
+  '/assets/art-samples/FR_main.png',
+  '/assets/art-samples/HOG5.jpg',
+  '/assets/art-samples/SA_3.jpg',
+  '/assets/art-samples/VR_concept1.jpg',
+  '/assets/art-samples/HOG6.jpg',
+  '/assets/art-samples/FR_c1.png',
+  '/assets/art-samples/DOM_store.jpg',
+  '/assets/art-samples/HOG12.jpg',
+  '/assets/art-samples/SA_5.jpg',
+  '/assets/art-samples/VR_bgd_1.jpg',
+  '/assets/art-samples/HOG14.jpg',
+];
+
 // Small gem / symbol sprites that float straight up (tight column floaters)
 const gemSymbols = [
   { src: '/assets/game/symbol-ruby.png',       x: 4,  delay: 0,    dur: 13, size: 40 },
@@ -37,8 +53,18 @@ const charFloaters = [
 
 <section id="hero" class="relative min-h-[90vh] flex items-center overflow-hidden" style="background: #0D0D0D;">
 
-  <!-- Subtle radial glow anchors — pure CSS, no images -->
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 80% 110%, rgba(230,57,70,0.07) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 20% -10%, rgba(254,149,58,0.05) 0%, transparent 60%);"></div>
+  <!-- Layer 1: Game scene collage (dark-tinted pulsing grid) -->
+  <div class="absolute inset-0 scene-collage" aria-hidden="true">
+    {sceneBg.map((src, i) => (
+      <div
+        class="scene-tile"
+        style={`background-image: url('${src}'); animation-delay: ${i * 1.4}s;`}
+      ></div>
+    ))}
+  </div>
+
+  <!-- Layer 2: Dark overlay -->
+  <div class="absolute inset-0" style="background: rgba(13,13,13,0.82);"></div>
 
   <!-- Layer 3a: Small gem symbols floating up -->
   <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -131,6 +157,25 @@ const charFloaters = [
 </section>
 
 <style>
+  /* ── Scene collage grid ───────────────────────────────────── */
+  .scene-collage {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .scene-tile {
+    background-size: cover;
+    background-position: center;
+    animation: scenePulse 9s ease-in-out infinite alternate;
+    filter: saturate(0.5) brightness(0.4);
+  }
+
+  @keyframes scenePulse {
+    0%   { transform: scale(1);    filter: saturate(0.45) brightness(0.38); }
+    100% { transform: scale(1.07); filter: saturate(0.7)  brightness(0.52); }
+  }
+
   /* ── Small gem floaters ───────────────────────────────────── */
   @keyframes floatGem {
     0%   { transform: translateY(0)      rotate(0deg)   scale(0.8);  opacity: 0; }
@@ -166,6 +211,7 @@ const charFloaters = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .scene-tile  { animation: none; }
     .float-gem   { animation: none; opacity: 0.08; }
     .float-char  { animation: none; opacity: 0.12; }
   }
