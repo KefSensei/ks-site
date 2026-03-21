@@ -1,0 +1,32 @@
+---
+// GA4 — only fires in production and only after user consent
+const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+
+{GA_ID && (
+  <script is:inline define:vars={{ GA_ID }}>
+    // Initialise dataLayer — gtag fires only after consent is granted
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.__ksGtag = gtag;
+
+    function loadGA() {
+      if (window.__ksGALoaded) return;
+      window.__ksGALoaded = true;
+      const s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      s.async = true;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID, { anonymize_ip: true });
+    }
+
+    // Fire immediately if user already consented in a previous visit
+    if (localStorage.getItem('ks_cookie_consent') === 'accepted') {
+      loadGA();
+    }
+
+    // Listen for mid-session consent (user clicks Accept on banner)
+    window.addEventListener('ks:consent-accept', loadGA);
+  </script>
+)}

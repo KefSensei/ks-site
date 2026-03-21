@@ -160,7 +160,7 @@ const games = [
     </div>
 
     <!-- Row 2: 4 equal cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
       {[
         { title: 'Finding Roxy',     tags: ['Slot + Match-3'], role: 'Original · 2026', cover: '/assets/game/finding-roxy-homescreen.png', isOriginal: true },
         { title: 'Detective Tempin', tags: ['Hidden Object'],  role: 'Co-Dev · 2013',   cover: '/assets/game/detective-tempin-banner.jpg', isOriginal: false },
@@ -239,7 +239,7 @@ const games = [
     to   { transform: translateX(-50%); }
   }
   .ticker-track {
-    animation: ticker 40s linear infinite;
+    animation: ticker 80s linear infinite;
     width: max-content;
   }
   .ticker-track:hover { animation-play-state: paused; }
