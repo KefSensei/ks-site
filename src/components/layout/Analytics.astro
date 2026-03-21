@@ -1,6 +1,6 @@
 ---
-// GA4 — only fires in production and only after user consent
-const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+// GA4 — only fires after user consent; ID is public by design
+const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? 'G-E0270B4B5L';
 ---
 
 {GA_ID && (
