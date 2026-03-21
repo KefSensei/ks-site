@@ -1,5 +1,5 @@
 ---
-import logoNegative from '@/assets/logo/logo-negative.png';
+import logoV04 from '@/assets/logo/logo-v04.png';
 
 const year = new Date().getFullYear();
 ---
@@ -11,14 +11,14 @@ const year = new Date().getFullYear();
       <!-- Brand -->
       <div class="space-y-4">
         <img
-          src={logoNegative.src}
+          src={logoV04.src}
           alt="Kef Sensei"
           class="h-16 w-auto object-contain"
           loading="lazy"
         />
         <p class="text-sm leading-relaxed text-white/60">
           Game Development Studio<br />
-          <span class="font-bold text-white/80">FUN Masters</span> — Est. 2007
+          <span class="font-bold text-white/80">Mastering FUN</span> since 2007
         </p>
       </div>
 
@@ -31,7 +31,6 @@ const year = new Date().getFullYear();
             { href: '/#portfolio', label: 'Our Work' },
             { href: '/#about',     label: 'About Us' },
             { href: '/#contact',   label: 'Contact' },
-            { href: '/games/roxys-magic-reels', label: "Roxy's Magic Reels" },
           ].map(({ href, label }) => (
             <li>
               <a href={href} class="text-sm text-white/60 hover:text-[#FE953A] transition-colors no-underline">
