@@ -11,6 +11,7 @@ const services = [
     audience: 'For studios that need trusted extra muscle without the hiring overhead.',
     svgPath: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
     color: '#E63946',
+    serviceKey: 'co-development',
   },
   {
     num: '02',
@@ -21,6 +22,7 @@ const services = [
     audience: 'For founders, publishers, or designers who need to test an idea before betting big.',
     svgPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
     color: '#FE953A',
+    serviceKey: 'prototyping',
   },
   {
     num: '03',
@@ -31,6 +33,7 @@ const services = [
     audience: 'For brands, EdTech, and product teams who want engagement that lasts.',
     svgPath: 'M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0012 0V2z',
     color: '#E63946',
+    serviceKey: 'gamification',
   },
   {
     num: '04',
@@ -41,6 +44,7 @@ const services = [
     audience: 'For publishers and studios that need a reliable long-term production partner.',
     svgPath: 'M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z',
     color: '#FE953A',
+    serviceKey: 'work-for-hire',
   },
   {
     num: '05',
@@ -52,6 +56,7 @@ const services = [
     svgPath: 'M12 2a10 10 0 100 20A10 10 0 0012 2zM2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z',
     color: '#E63946',
     isNew: true,
+    serviceKey: 'ai-dev',
   },
 ];
 ---
@@ -144,7 +149,7 @@ const services = [
               </ul>
             </div>
             <a
-              href="/#contact"
+              href={`/?service=${svc.serviceKey}#contact`}
               class="inline-flex items-center gap-2 text-xs font-bold mt-4 pt-3 border-t border-white/10 transition-opacity hover:opacity-70"
               style={`color: ${svc.color};`}
             >

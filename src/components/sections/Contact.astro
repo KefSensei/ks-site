@@ -40,7 +40,7 @@ import Badge from '@/components/ui/Badge.astro';
     <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-sm border border-[#E5E7EB] reveal-up" id="contact-form-wrapper">
       <form
         id="contact-form"
-        action="https://formspree.io/f/YOUR_FORM_ID"
+        action={`https://formspree.io/${import.meta.env.PUBLIC_FORMSPREE_ID}`}
         method="POST"
         class="space-y-5"
         novalidate
@@ -145,6 +145,39 @@ import Badge from '@/components/ui/Badge.astro';
 </section>
 
 <script>
+  // Per-service textarea placeholder copy
+  const SERVICE_PLACEHOLDERS: Record<string, string> = {
+    '':               "Example: 'I have a match-3 core loop that I want to wrap in a slot mechanic — can you prototype it in 2 weeks?' or 'We're halfway through production and need a feature team to unblock us...'",
+    'co-development': "Example: 'We need 2–3 senior devs for 4 months to build the backend systems for our casual mobile title — what's your bandwidth look like?'",
+    'prototyping':    "Example: 'I have a slot mechanic concept and need a playable prototype in 2 weeks to pitch to publishers — what do you need from me to get started?'",
+    'gamification':   "Example: 'We're adding a rewards loop to our fitness app — can you design the progression system and point economy so it actually feels like a game?'",
+    'work-for-hire':  "Example: 'We're halfway through a hidden object game and need a feature team to own the hint system, UI polish, and level editor tool.'",
+    'ai-dev':         "Example: 'We want LLM-driven procedural dialogue in our RPG — can you prototype an AI NPC system and advise on how to integrate it into our Unity pipeline?'",
+    'consulting':     "Example: 'Our day-3 retention is falling off a cliff — we think the core loop is broken. Can you do a design review and give us actionable recommendations?'",
+    'other':          "Tell us what's on your mind — no formal pitch needed. Just describe what you're building or exploring and we'll take it from there.",
+  };
+
+  const serviceSelect = document.getElementById('service') as HTMLSelectElement | null;
+  const messageArea   = document.getElementById('message') as HTMLTextAreaElement | null;
+
+  function updatePlaceholder() {
+    if (!serviceSelect || !messageArea) return;
+    messageArea.placeholder = SERVICE_PLACEHOLDERS[serviceSelect.value] ?? SERVICE_PLACEHOLDERS[''];
+  }
+
+  serviceSelect?.addEventListener('change', updatePlaceholder);
+
+  // Pre-select from URL param (e.g. /?service=co-development#contact)
+  const urlService = new URLSearchParams(window.location.search).get('service');
+  if (urlService && serviceSelect) {
+    serviceSelect.value = urlService;
+    updatePlaceholder();
+    // Clean the query string without reloading
+    history.replaceState(null, '', window.location.pathname + '#contact');
+  } else {
+    updatePlaceholder();
+  }
+
   // Stage radio pill styling
   document.querySelectorAll('.stage-option').forEach((label) => {
     const input = label.querySelector('input') as HTMLInputElement;

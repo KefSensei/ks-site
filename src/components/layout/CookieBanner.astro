@@ -1,0 +1,88 @@
+---
+// GDPR/CCPA consent banner — required because GA4 sets cookies
+---
+
+<div
+  id="cookie-banner"
+  role="dialog"
+  aria-label="Cookie consent"
+  class="cookie-banner"
+  style="display:none;"
+>
+  <p class="cookie-text">
+    We use Google Analytics to understand how visitors find and use this site — no personal data sold, ever.
+    <a href="/privacy-policy" class="cookie-link">Privacy Policy</a>
+  </p>
+  <div class="cookie-actions">
+    <button id="cookie-decline" class="cookie-btn cookie-btn--decline">Decline</button>
+    <button id="cookie-accept"  class="cookie-btn cookie-btn--accept">Accept</button>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex !important;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    max-width: 680px;
+    width: calc(100% - 2rem);
+    padding: 0.875rem 1.25rem;
+    background: #1C1C1C;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.72);
+  }
+  .cookie-banner[style*="display:none"] { display: none !important; }
+
+  .cookie-text { flex: 1; line-height: 1.5; margin: 0; }
+  .cookie-link { color: #FE953A; text-decoration: underline; }
+
+  .cookie-actions { display: flex; gap: 0.625rem; flex-shrink: 0; }
+
+  .cookie-btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 2rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s;
+  }
+  .cookie-btn:hover { opacity: 0.85; }
+
+  .cookie-btn--decline {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.65);
+  }
+  .cookie-btn--accept {
+    background: linear-gradient(135deg, #E63946, #FE953A);
+    color: #fff;
+  }
+</style>
+
+<script>
+  const banner  = document.getElementById('cookie-banner') as HTMLElement | null;
+  const stored  = localStorage.getItem('ks_cookie_consent');
+
+  // Show only if no prior choice
+  if (!stored && banner) banner.style.display = '';
+
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    localStorage.setItem('ks_cookie_consent', 'accepted');
+    banner && (banner.style.display = 'none');
+    window.dispatchEvent(new Event('ks:consent-accept'));
+  });
+
+  document.getElementById('cookie-decline')?.addEventListener('click', () => {
+    localStorage.setItem('ks_cookie_consent', 'declined');
+    banner && (banner.style.display = 'none');
+  });
+</script>
