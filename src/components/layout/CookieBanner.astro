@@ -67,21 +67,31 @@
   }
 </style>
 
-<script>
-  const banner  = document.getElementById('cookie-banner') as HTMLElement | null;
-  const stored  = localStorage.getItem('ks_cookie_consent');
+<script is:inline>
+  (function () {
+    function init() {
+      var banner  = document.getElementById('cookie-banner');
+      if (!banner) return;
+      var stored = localStorage.getItem('ks_cookie_consent');
 
-  // Show only if no prior choice
-  if (!stored && banner) banner.style.display = '';
+      if (!stored) banner.style.display = 'flex';
 
-  document.getElementById('cookie-accept')?.addEventListener('click', () => {
-    localStorage.setItem('ks_cookie_consent', 'accepted');
-    banner && (banner.style.display = 'none');
-    window.dispatchEvent(new Event('ks:consent-accept'));
-  });
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        localStorage.setItem('ks_cookie_consent', 'accepted');
+        banner.style.display = 'none';
+        window.dispatchEvent(new Event('ks:consent-accept'));
+      });
 
-  document.getElementById('cookie-decline')?.addEventListener('click', () => {
-    localStorage.setItem('ks_cookie_consent', 'declined');
-    banner && (banner.style.display = 'none');
-  });
+      document.getElementById('cookie-decline').addEventListener('click', function () {
+        localStorage.setItem('ks_cookie_consent', 'declined');
+        banner.style.display = 'none';
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
 </script>

@@ -1,17 +1,17 @@
 ---
-import logoV04 from '@/assets/logo/logo-v04.png';
+import logoNegative from '@/assets/logo/logo-negative.png';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="bg-[#1A1210] text-white/80 pt-16 pb-8">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10 justify-items-center">
 
       <!-- Brand -->
-      <div class="space-y-4">
+      <div class="flex flex-col items-center text-center space-y-4">
         <img
-          src={logoV04.src}
+          src={logoNegative.src}
           alt="Kef Sensei"
           class="h-16 w-auto object-contain"
           loading="lazy"
@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
       </div>
 
       <!-- Nav links -->
-      <div>
+      <div class="text-center">
         <h3 class="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Navigate</h3>
         <ul class="space-y-2 list-none m-0 p-0">
           {[
@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
       </div>
 
       <!-- Contact -->
-      <div>
+      <div class="text-center">
         <h3 class="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Get in Touch</h3>
         <a
           href="mailto:info@kefsensei.com"
@@ -55,7 +55,7 @@ const year = new Date().getFullYear();
           We'd love to hear from you.
         </p>
         <!-- Social icons -->
-        <div class="flex items-center gap-4 mt-5">
+        <div class="flex items-center justify-center gap-4 mt-5">
           <a href="https://x.com/kefsensei" target="_blank" rel="noopener noreferrer"
              aria-label="Kef Sensei on X"
              class="text-white/30 hover:text-[#FE953A] transition-colors">
