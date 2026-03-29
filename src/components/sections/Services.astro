@@ -184,3 +184,34 @@ const services = [
 
   </div>
 </section>
+
+<script>
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduced) {
+  // Section heading
+  gsap.from('#services .mb-12', {
+    scrollTrigger: { trigger: '#services', start: 'top 78%', once: true },
+    y: 30, opacity: 0, duration: 0.6, ease: 'power3.out',
+  });
+
+  // Service cards — stagger in with slight y offset
+  const cards = document.querySelectorAll('#services .service-card, #services .grid > div:last-child');
+  gsap.from(cards, {
+    scrollTrigger: { trigger: '#services .grid', start: 'top 82%', once: true },
+    y: 50, opacity: 0, duration: 0.55, stagger: { each: 0.09, from: 'start' },
+    ease: 'power3.out',
+  });
+
+  // Icon bounce on entrance
+  const icons = document.querySelectorAll('#services .service-card .w-14');
+  gsap.from(icons, {
+    scrollTrigger: { trigger: '#services .grid', start: 'top 82%', once: true },
+    scale: 0, duration: 0.4, stagger: { each: 0.09, from: 'start' },
+    ease: 'back.out(2)', delay: 0.15,
+  });
+}
+</script>

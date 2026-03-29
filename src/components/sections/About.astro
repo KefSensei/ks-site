@@ -52,9 +52,12 @@ const chars = [
         </span>
       </div>
       <div class="relative flex items-start gap-0 overflow-x-auto pb-4">
-        <div class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none" style="background: linear-gradient(to right, #E63946 0%, #E63946 55%, #FE953A 75%, #E5E7EB 100%);"></div>
+        <!-- Base track (always visible, dim) -->
+        <div class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none" style="background: #E5E7EB;"></div>
+        <!-- Animated fill line -->
+        <div id="timeline-line" class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none timeline-line-animated" style="background: linear-gradient(to right, #E63946 0%, #E63946 55%, #FE953A 75%, #FE953A 100%);"></div>
         {milestones.map((m) => (
-          <div class="relative flex-1 min-w-[80px] group cursor-default">
+          <div class="timeline-milestone relative flex-1 min-w-[80px] group cursor-default">
             <div
               class="relative z-10 w-5 h-5 rounded-full flex items-center justify-center mx-auto transition-transform duration-200 group-hover:scale-125"
               style={m.isCurrent
@@ -277,6 +280,12 @@ const chars = [
   .char-frame.is-exiting  { z-index: 2; }
   .char-frame.is-active   { z-index: 3; }
 
+  /* ── Timeline line draw ──────────────────────────────── */
+  .timeline-line-animated {
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
   /* ── Reduced motion ──────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .char-frame.is-entering, .char-frame.is-exiting { animation: none; }
@@ -285,6 +294,54 @@ const chars = [
 </style>
 
 <script>
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Timeline draw animation ──────────────────────────────
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reducedMotion) {
+  const line = document.getElementById('timeline-line');
+  if (line) {
+    gsap.to(line, {
+      scrollTrigger: { trigger: '#about', start: 'top 72%', once: true },
+      scaleX: 1,
+      duration: 1.6,
+      ease: 'power2.inOut',
+      transformOrigin: 'left center',
+    });
+  }
+
+  // Milestone dots pop in sequentially
+  const dots = document.querySelectorAll('.timeline-milestone');
+  gsap.from(dots, {
+    scrollTrigger: { trigger: '#about', start: 'top 72%', once: true },
+    scale: 0, opacity: 0,
+    duration: 0.3,
+    stagger: 0.12,
+    ease: 'back.out(2)',
+    delay: 0.3,
+  });
+
+  // About copy + carousel reveal
+  gsap.from('#about .grid > div', {
+    scrollTrigger: { trigger: '#about .grid', start: 'top 80%', once: true },
+    y: 40, opacity: 0,
+    duration: 0.7,
+    stagger: 0.2,
+    ease: 'power3.out',
+  });
+
+  // Quote card
+  gsap.from('#about .mt-5.rounded-2xl', {
+    scrollTrigger: { trigger: '#about .mt-5.rounded-2xl', start: 'top 88%', once: true },
+    y: 24, opacity: 0,
+    duration: 0.55,
+    ease: 'power3.out',
+  });
+}
+
+// ── Character carousel ────────────────────────────────────
 (function () {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
