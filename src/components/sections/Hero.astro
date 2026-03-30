@@ -18,57 +18,12 @@ const sceneBg = [
   '/assets/art-samples/HOG14.jpg',
 ];
 
-// Small gem / symbol sprites that float straight up (tight column floaters)
-const gemSymbols = [
-  { src: '/assets/game/symbol-ruby.png',       x: 4,  delay: 0,    dur: 13, size: 40 },
-  { src: '/assets/game/symbol-emerald.png',    x: 11, delay: 2.5,  dur: 16, size: 28 },
-  { src: '/assets/game/symbol-sapphire.png',   x: 22, delay: 1,    dur: 12, size: 46 },
-  { src: '/assets/game/symbol-amethyst.png',   x: 35, delay: 4,    dur: 15, size: 34 },
-  { src: '/assets/game/symbol-topaz.png',      x: 55, delay: 0.5,  dur: 17, size: 38 },
-  { src: '/assets/game/symbol-potion.png',     x: 66, delay: 3,    dur: 14, size: 32 },
-  { src: '/assets/game/symbol-crystal.png',    x: 76, delay: 1.5,  dur: 18, size: 44 },
-  { src: '/assets/game/symbol-scatter.png',    x: 17, delay: 6.5,  dur: 19, size: 26 },
-  { src: '/assets/game/symbol-mushroom.png',   x: 44, delay: 7,    dur: 13, size: 30 },
-  { src: '/assets/game/symbol-bat.png',        x: 72, delay: 2,    dur: 16, size: 36 },
-  { src: '/assets/game/symbol-multiplier.png', x: 88, delay: 8,    dur: 14, size: 28 },
-];
-
-// Larger character floaters — transparent PNGs, drift slowly up
-const charFloaters = [
-  // Sensei characters
-  { src: '/assets/studio/sensei-ready-tp.png',      x: 80, delay: 0,   dur: 26, size: 160, rotate: 5  },
-  { src: '/assets/studio/sensei-meditation-tp.png', x: 60, delay: 8,   dur: 30, size: 150, rotate: -4 },
-  { src: '/assets/studio/sensei-welcome-tp.png',    x: 90, delay: 18,  dur: 24, size: 145, rotate: 6  },
-  { src: '/assets/studio/sensei-students-tp.png',   x: 70, delay: 35,  dur: 28, size: 175, rotate: -3 },
-  // Runner characters
-  { src: '/assets/studio/runner-mage.png',          x: 85, delay: 4,   dur: 22, size: 110, rotate: 8  },
-  { src: '/assets/studio/runner-ranger.png',        x: 55, delay: 14,  dur: 25, size: 105, rotate: -7 },
-  { src: '/assets/studio/runner-tank.png',          x: 75, delay: 28,  dur: 23, size: 120, rotate: 4  },
-  // Enanos (Finding Roxy dwarves — only fully transparent ones)
-  { src: '/assets/studio/enano-1.png',              x: 65, delay: 6,   dur: 20, size: 120, rotate: -5 },
-  { src: '/assets/studio/enano-1.png',              x: 53, delay: 38,  dur: 23, size: 110, rotate: 8  },
-  // Roxy wild symbol — small accent
-  { src: '/assets/game/symbol-roxy.png',            x: 48, delay: 10,  dur: 21, size: 80,  rotate: 10 },
-];
 ---
 
 <section id="hero" class="relative min-h-[90vh] flex items-center overflow-hidden" style="background: #0D0D0D;">
 
   <!-- Layer 0: Three.js Particle Canvas -->
   <HeroCanvas />
-
-  <!-- Layer 0.5: Ambient ember video loop (Kling AI generated) -->
-  <video
-    class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-    autoplay
-    muted
-    loop
-    playsinline
-    aria-hidden="true"
-    style="z-index: 2; opacity: 0.28; mix-blend-mode: screen;"
-  >
-    <source src="/assets/video/hero-loop.mp4" type="video/mp4" />
-  </video>
 
   <!-- Layer 1: Game scene collage (dark-tinted pulsing grid) -->
   <div class="absolute inset-0 scene-collage" aria-hidden="true">
@@ -82,30 +37,6 @@ const charFloaters = [
 
   <!-- Layer 2: Dark overlay -->
   <div class="absolute inset-0" style="background: rgba(13,13,13,0.82);"></div>
-
-  <!-- Layer 3a: Small gem symbols floating up -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-    {gemSymbols.map((s) => (
-      <img
-        src={s.src}
-        alt=""
-        class="float-gem absolute"
-        style={`left:${s.x}%;bottom:-60px;width:${s.size}px;height:${s.size}px;animation-duration:${s.dur}s;animation-delay:${s.delay}s;`}
-      />
-    ))}
-  </div>
-
-  <!-- Layer 3b: Larger character / icon floaters -->
-  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-    {charFloaters.map((c) => (
-      <img
-        src={c.src}
-        alt=""
-        class="float-char absolute"
-        style={`left:${c.x}%;bottom:-120px;width:${c.size}px;height:${c.size}px;animation-duration:${c.dur}s;animation-delay:${c.delay}s;--rot:${c.rotate}deg;`}
-      />
-    ))}
-  </div>
 
   <!-- Layer 4: Radial grounding gradient (left side) -->
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 90% at 20% 60%, rgba(13,13,13,0.45) 0%, transparent 100%);"></div>
@@ -162,7 +93,7 @@ const charFloaters = [
       <div id="hero-stats" class="flex gap-10 pt-5" style="border-top: 1px solid rgba(255,255,255,0.1);">
         {[
           { num: '19+', label: 'Years',          count: 19,   suffix: '+' },
-          { num: '10+', label: 'Shipped Titles', count: 10,   suffix: '+' },
+          { num: '15+', label: 'Shipped Titles', count: 15,   suffix: '+' },
           { num: '∞',   label: 'FUN Delivered',  count: null, suffix: ''  },
         ].map(({ num, label, count, suffix }) => (
           <div>
@@ -203,43 +134,6 @@ const charFloaters = [
     100% { transform: scale(1.07); filter: saturate(0.7)  brightness(0.52); }
   }
 
-  /* ── Small gem floaters ───────────────────────────────────── */
-  @keyframes floatGem {
-    0%   { transform: translateY(0)      rotate(0deg)   scale(0.8);  opacity: 0; }
-    6%   { opacity: 0.55; }
-    90%  { opacity: 0.4; }
-    100% { transform: translateY(-108vh) rotate(25deg)  scale(1.05); opacity: 0; }
-  }
-
-  .float-gem {
-    animation-name: floatGem;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
-    object-fit: contain;
-    mix-blend-mode: screen;
-    filter:
-      drop-shadow(0 0 6px rgba(230,57,70,0.5))
-      drop-shadow(0 0 14px rgba(254,149,58,0.25));
-  }
-
-  /* ── Large character floaters ─────────────────────────────── */
-  @keyframes floatChar {
-    0%   { transform: translateY(0)      rotate(0deg)             scale(0.75); opacity: 0;    }
-    8%   { opacity: 0.55; }
-    80%  { opacity: 0.40; }
-    100% { transform: translateY(-110vh) rotate(var(--rot, 8deg)) scale(1.05);  opacity: 0;   }
-  }
-
-  .float-char {
-    animation-name: floatChar;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
-  }
-
   /* ── Scanlines overlay ────────────────────────────────── */
   .scanlines {
     background: repeating-linear-gradient(
@@ -260,10 +154,8 @@ const charFloaters = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .scene-tile  { animation: none; }
-    .float-gem   { animation: none; opacity: 0.08; }
-    .float-char  { animation: none; opacity: 0.12; }
-    .scanlines   { animation: none; }
+    .scene-tile { animation: none; }
+    .scanlines  { animation: none; }
   }
 </style>
 
