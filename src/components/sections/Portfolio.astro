@@ -242,4 +242,51 @@ const games = [
     width: max-content;
   }
   .ticker-track:hover { animation-play-state: paused; }
+
+  /* Pre-hide game cards for GSAP reveal */
+  .game-card-gsap {
+    opacity: 0;
+    transform: translateY(40px);
+  }
 </style>
+
+<script>
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduced) {
+  // ── Portfolio section header reveal ───────────────────
+  gsap.from('#portfolio .reveal-up', {
+    scrollTrigger: { trigger: '#portfolio', start: 'top 80%', once: true },
+    y: 30, opacity: 0, duration: 0.6, ease: 'power3.out',
+  });
+
+  // ── Game card stagger ─────────────────────────────────
+  // Row 1: the two banner cards
+  const bannerCards = document.querySelectorAll('#portfolio .grid.grid-cols-3 > div');
+  gsap.from(bannerCards, {
+    scrollTrigger: { trigger: '#portfolio .grid.grid-cols-3', start: 'top 85%', once: true },
+    y: 50, opacity: 0, duration: 0.65, stagger: 0.12, ease: 'power3.out',
+  });
+
+  // Row 2: the 4 square cards
+  const squareCards = document.querySelectorAll('#portfolio .grid.grid-cols-4 > div, #portfolio .grid.grid-cols-2 > div');
+  gsap.from(squareCards, {
+    scrollTrigger: {
+      trigger: '#portfolio .grid.grid-cols-4, #portfolio .grid.grid-cols-2',
+      start: 'top 88%',
+      once: true,
+    },
+    y: 50, opacity: 0, duration: 0.55, stagger: 0.08, ease: 'power3.out',
+  });
+
+  // ── Credits row ───────────────────────────────────────
+  const creditChips = document.querySelectorAll('#portfolio .rounded-full.border');
+  gsap.from(creditChips, {
+    scrollTrigger: { trigger: '#portfolio .rounded-2xl.overflow-hidden', start: 'top 88%', once: true },
+    scale: 0.85, opacity: 0, duration: 0.35, stagger: 0.05, ease: 'back.out(1.5)',
+  });
+}
+</script>

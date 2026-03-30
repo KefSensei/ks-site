@@ -11,7 +11,9 @@ const milestones = [
   { year: '2018', label: 'Detective Tempin',           shipped: false },
   { year: '2020', label: 'Runestrike',                 shipped: true  },
   { year: '2022', label: 'Rabbit Hole',                shipped: false },
-  { year: '2024', label: 'Finding Roxy',               shipped: false, isCurrent: true },
+  { year: '2024', label: 'Finding Roxy',               shipped: false },
+  { year: '2025', label: 'Roxy: New Seasons',          shipped: false },
+  { year: '2026', label: 'New IP · TBA',               shipped: false, isCurrent: true },
 ];
 
 const chars = [
@@ -52,9 +54,12 @@ const chars = [
         </span>
       </div>
       <div class="relative flex items-start gap-0 overflow-x-auto pb-4">
-        <div class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none" style="background: linear-gradient(to right, #E63946 0%, #E63946 55%, #FE953A 75%, #E5E7EB 100%);"></div>
+        <!-- Base track (always visible, dim) -->
+        <div class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none" style="background: #E5E7EB;"></div>
+        <!-- Animated fill line -->
+        <div id="timeline-line" class="absolute top-[11px] left-0 right-0 h-0.5 pointer-events-none timeline-line-animated" style="background: linear-gradient(to right, #E63946 0%, #E63946 55%, #FE953A 75%, #FE953A 100%);"></div>
         {milestones.map((m) => (
-          <div class="relative flex-1 min-w-[80px] group cursor-default">
+          <div class="timeline-milestone relative flex-1 min-w-[80px] group cursor-default">
             <div
               class="relative z-10 w-5 h-5 rounded-full flex items-center justify-center mx-auto transition-transform duration-200 group-hover:scale-125"
               style={m.isCurrent
@@ -84,7 +89,7 @@ const chars = [
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
       <!-- Left: copy -->
-      <div class="space-y-5 reveal-up">
+      <div class="space-y-5">
         <p class="text-lg text-[#4B5563] leading-relaxed">
           We started Kef Sensei with a simple obsession: make games people genuinely love.
           Not just functional games — games with soul. The kind that spark a real laugh,
@@ -116,7 +121,7 @@ const chars = [
         <div class="grid grid-cols-3 gap-4 pt-2">
           {[
             { num: '2007', label: 'Founded' },
-            { num: '10+',  label: 'Shipped Titles' },
+            { num: '15+',  label: 'Shipped Titles' },
             { num: '∞',    label: 'FUN Delivered' },
           ].map(({ num, label }) => (
             <div class="rounded-xl p-4 text-center border border-[#E5E7EB]">
@@ -128,7 +133,7 @@ const chars = [
       </div>
 
       <!-- Right: Cycling character carousel -->
-      <div class="reveal-up" id="sensei-panel">
+      <div id="sensei-panel">
 
         <!-- Main stage (no background/border — transparent images float freely) -->
         <div class="sensei-stage" id="sensei-stage"
@@ -179,7 +184,8 @@ const chars = [
     width: 100%;
     aspect-ratio: 4 / 5;
     max-height: 480px;
-    overflow: hidden;
+    overflow: clip;
+    overflow-clip-margin: 20px;
   }
 
   /* ── Character frame ────────────────────────────────── */
@@ -277,6 +283,12 @@ const chars = [
   .char-frame.is-exiting  { z-index: 2; }
   .char-frame.is-active   { z-index: 3; }
 
+  /* ── Timeline line draw ──────────────────────────────── */
+  .timeline-line-animated {
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
   /* ── Reduced motion ──────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .char-frame.is-entering, .char-frame.is-exiting { animation: none; }
@@ -285,6 +297,55 @@ const chars = [
 </style>
 
 <script>
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Timeline draw animation ──────────────────────────────
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reducedMotion) {
+  const line = document.getElementById('timeline-line');
+  if (line) {
+    gsap.to(line, {
+      scrollTrigger: { trigger: '#about', start: 'top 72%', once: true },
+      scaleX: 1,
+      duration: 1.6,
+      ease: 'power2.inOut',
+      transformOrigin: 'left center',
+    });
+  }
+
+  // Milestone dots pop in sequentially
+  const dots = document.querySelectorAll('.timeline-milestone');
+  gsap.from(dots, {
+    scrollTrigger: { trigger: '#about', start: 'top 72%', once: true },
+    scale: 0, opacity: 0,
+    duration: 0.3,
+    stagger: 0.12,
+    ease: 'back.out(2)',
+    delay: 0.3,
+  });
+
+  // About copy + carousel reveal
+  gsap.from('#about .grid > div', {
+    scrollTrigger: { trigger: '#about .grid', start: 'top 80%', once: true },
+    y: 40, opacity: 0,
+    duration: 0.7,
+    stagger: 0.2,
+    ease: 'power3.out',
+    immediateRender: false,
+  });
+
+  // Quote card
+  gsap.from('#about .mt-5.rounded-2xl', {
+    scrollTrigger: { trigger: '#about .mt-5.rounded-2xl', start: 'top 88%', once: true },
+    y: 24, opacity: 0,
+    duration: 0.55,
+    ease: 'power3.out',
+  });
+}
+
+// ── Character carousel ────────────────────────────────────
 (function () {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
