@@ -1,6 +1,6 @@
 ---
 // GA4 — only fires after user consent; ID is public by design
-const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+import { PUBLIC_GA_MEASUREMENT_ID as GA_ID } from 'astro:env/client';
 ---
 
 {GA_ID && (
